@@ -11,8 +11,6 @@ public class GameController : MonoBehaviour
     private const float HERO_SPEED = 3f;
     private const float LEFT_MARGIN = -2.5f;
     private const float MAX_STICK_SCALE = 550f;
-    private const float MAX_COL_SCLAE = 1.5f;
-    private const float MIN_COL_SCALE = 0.3f;
 
     private Vector3 SPAWN_VECTOR = new Vector3(5f, -3f, 0f);
     #endregion
@@ -148,6 +146,7 @@ public class GameController : MonoBehaviour
                 stick.transform.position = prevColumn.Find("Column").transform.Find("Right_Col").transform.position;
             }
         }
+
         if (stick != null)
         {
             if (Input.GetMouseButton(0))
@@ -157,6 +156,7 @@ public class GameController : MonoBehaviour
                     stick.transform.localScale += new Vector3(0, 4f, 0);
                 }
             }
+
             if (Input.GetMouseButtonUp(0))
             {
                 audioManager.Play(AudioManager.AudioState.Stop);
@@ -174,6 +174,7 @@ public class GameController : MonoBehaviour
     {
         stick.transform.Rotate(0, 0, -FALL_STICK_SPEED);
         angle += FALL_STICK_SPEED;
+
         if (angle >= 90)
         {
             angle = 0;
@@ -273,10 +274,12 @@ public class GameController : MonoBehaviour
     {
 
         heroPosition = new Vector3(-3f, heroPosY, 0f);
+
         if (Scoremanager.score > PlayerPrefs.GetInt("Score"))
         {
             PlayerPrefs.SetInt("Score", Scoremanager.score);
         }
+
         scoreLabel.text = "Score : " + Scoremanager.score.ToString();
         bestScoreLabel.text = "Best : " + PlayerPrefs.GetInt("Score").ToString();
         isApply = false;
